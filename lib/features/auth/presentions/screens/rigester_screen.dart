@@ -8,8 +8,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/shared_widgets/custom_input.dart';
 import '../../../../core/utlis/app_assets.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,9 +26,9 @@ class LoginScreen extends StatelessWidget {
             ),
             child: Center(
                 child: Text(
-              AppStrings.welcomeBack.tr(context),
-              style: Theme.of(context).textTheme.displayLarge,
-            )),
+                  AppStrings.welcomeBack.tr(context),
+                  style: Theme.of(context).textTheme.displayLarge,
+                )),
           ),
           Form(
             child: Padding(
@@ -59,11 +59,8 @@ class LoginScreen extends StatelessWidget {
                       isPassword: true,
                       icon: Icons.remove_red_eye,
                       validation: (value) {
-                        if (value == null ||
-                            value.trim().isEmpty ||
-                            value.length < 6) {
-                          return AppStrings.pleaseEnterValidPassword
-                              .tr(context);
+                        if(value==null||value.trim().isEmpty||value.length<6){
+                          return AppStrings.pleaseEnterValidPassword.tr(context);
                         }
                       },
                     ),
@@ -81,25 +78,15 @@ class LoginScreen extends StatelessWidget {
                       height: 64.h,
                     ),
                     CustomButton(text: AppStrings.signIn.tr(context)),
-                    SizedBox(
-                      height: 72.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-
-                        Text(AppStrings.dontHaveAccount.tr(context)),
-                        TextButton(
-                            onPressed: () {},
-                            child: Text(
-                              AppStrings.signUp.tr(context),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displaySmall!
-                                  .copyWith(color: AppColors.primary),
-                            )),
-                      ],
-                    ),
+                    TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          AppStrings.signUp.tr(context),
+                          style: Theme.of(context)
+                              .textTheme
+                              .displaySmall!
+                              .copyWith(color: AppColors.primary),
+                        ))
                   ],
                 ),
               ),

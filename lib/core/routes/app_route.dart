@@ -11,6 +11,8 @@ import 'package:chef_app/features/profile/presentions/screens/setting_screen.dar
 import 'package:chef_app/features/profile/presentions/screens/update_profile_screen.dart';
 import 'package:flutter/material.dart';
 
+import '../../features/auth/presentions/screens/rigester_screen.dart';
+
 class Routes {
  static const String initRoute="/";
 
@@ -20,6 +22,7 @@ class Routes {
  static const String resetPasswordScreen="/restPasswordScreen";
  static const String sendCodeScreen="/sendCodeScreen";
  static const String loginScreen="/loginScreen";
+ static const String registerScreen="/register";
 
  //menuScreen
 
@@ -51,6 +54,8 @@ class AppRoute{
         return MaterialPageRoute(builder: (_)=> const SendCodeScreen());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_)=> const LoginScreen());
+      case Routes.registerScreen:
+        return MaterialPageRoute(builder: (_)=> const RegisterScreen());
       case Routes.addMenuScreen:
         return MaterialPageRoute(builder: (_)=> const AddMenuScreen());
       case Routes.menuHome:
