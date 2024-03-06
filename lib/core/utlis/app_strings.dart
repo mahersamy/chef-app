@@ -15,6 +15,8 @@ class AppStrings {
   static const String name = 'name';
   static const String phoneNumber = 'phone_number';
   static const String password = 'password';
+  static const String minCharge = 'minCharge';
+  static const String brandName = 'brandName';
   static const String confirmPassword = 'confirmPassword';
   static const String forgetPassword = 'forgetPassword';
   static const String newPassword = 'newPassword';
@@ -30,6 +32,7 @@ class AppStrings {
   static const String pleaseEnterValidPassword = 'please_enter_valid_password';
   static const String pleaseEnterValidPhone = 'please_enter_phone';
   static const String pleaseEnterValidName = 'please_enter_name';
+  static const String pleaseEnterValidBrandName = 'please_enter_brandName';
   static const String yes = 'yes';
   static const String no = 'no';
   static const String pleaseEnterValidDesc = 'please_enter_desc';

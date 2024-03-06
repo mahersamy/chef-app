@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
                 title: 'Chef app',
                 theme: getAppTheme(),
                 onGenerateRoute: appRoute.generateRoute,
-                home:LoginScreen(),
+                // home:LoginScreen(),
               );
             },
           ),

@@ -1,4 +1,6 @@
+import 'package:chef_app/core/commen/commen.dart';
 import 'package:chef_app/core/local/app_locale.dart';
+import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/core/shared_widgets/custom_button.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
 import 'package:chef_app/core/utlis/app_strings.dart';
@@ -13,7 +15,9 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController textEditingController = TextEditingController();
+    TextEditingController emailEditingController = TextEditingController();
+    TextEditingController passwordEditingController = TextEditingController();
+
     return Scaffold(
       body: Stack(
         children: [
@@ -41,7 +45,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     CustomField(
                       hintText: AppStrings.email.tr(context),
-                      controller: textEditingController,
+                      controller: emailEditingController,
                       validation: (value) {
                         if (value == null ||
                             value.trim().isEmpty ||
@@ -55,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     CustomField(
                       hintText: AppStrings.password.tr(context),
-                      controller: textEditingController,
+                      controller: passwordEditingController,
                       isPassword: true,
                       icon: Icons.remove_red_eye,
                       validation: (value) {
@@ -73,8 +77,8 @@ class LoginScreen extends StatelessWidget {
                     Row(
                       children: [
                         TextButton(
-                            onPressed: () {},
-                            child: Text(AppStrings.forgetPassword.tr(context))),
+                            onPressed: () =>navigator(context: context, route:Routes.resetPasswordScreen),
+                            child: Text(AppStrings.forgetPassword.tr(context),style: Theme.of(context).textTheme.displaySmall!.copyWith(color: AppColors.grey),)),
                       ],
                     ),
                     SizedBox(
@@ -90,7 +94,9 @@ class LoginScreen extends StatelessWidget {
 
                         Text(AppStrings.dontHaveAccount.tr(context)),
                         TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              navigator(context: context, route: Routes.registerScreen);
+                            },
                             child: Text(
                               AppStrings.signUp.tr(context),
                               style: Theme.of(context)

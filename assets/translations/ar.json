@@ -11,6 +11,8 @@
   "iHaveAccount": "انا املك حساب مسبقا",
   "phone_number": "رقم الهاتف",
   "password": "كلمة المرور",
+  "minCharge": "الحد الأدنى للطلب",
+  "brandName": "اسم العلامة التجارية",
   "confirmPassword": "تأكيد كلمة المرور",
   "forgetPassword": "نسيت كلمة السر؟",
   "sendResetLink": "إرسال الكود",
@@ -31,6 +33,8 @@
   "please_enter_address": "من فضلك أدخل عنوان صالح",
   "please_enter_social": "من فضلك أدخل رابط تواصل اجتماعي صالح",
   "please_enter_desc": "من فضلك أدخل وصف صالح",
+  "please_enter_brandName": "الرجاء إدخال اسم علامة تجارية صالح",
+
   "yes": "نعم",
   "no": "لا",
   "le": "جنيه",

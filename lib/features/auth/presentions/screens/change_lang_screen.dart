@@ -1,3 +1,4 @@
+import 'package:chef_app/core/commen/commen.dart';
 import 'package:chef_app/core/global_logic/cubit/global_cubit.dart';
 import 'package:chef_app/core/local/app_locale.dart';
 import 'package:chef_app/core/utlis/app_assets.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/routes/app_route.dart';
 import '../../../../core/shared_widgets/custom_image.dart';
 import '../widgets/lang_button.dart';
 
@@ -45,9 +47,16 @@ class ChangeLangScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        LangButton(text: "English",onPressed: ()=>BlocProvider.of<GlobalCubit>(context).switchLang("en"),),
+        LangButton(text: "English",onPressed: () {
+          BlocProvider.of<GlobalCubit>(context).switchLang("en");
+          navigator(context: context, route: Routes.loginScreen);
+        },),
         SizedBox(width: 47.w,),
-        LangButton(text: "العربية",onPressed: ()=>BlocProvider.of<GlobalCubit>(context).switchLang("ar"),),
+        LangButton(text: "العربية",onPressed: () {
+          BlocProvider.of<GlobalCubit>(context).switchLang("ar");
+          navigator(context: context, route: Routes.loginScreen);
+
+        },),
       ],),
     );
   }

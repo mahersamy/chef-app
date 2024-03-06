@@ -11,7 +11,7 @@ import 'package:chef_app/features/profile/presentions/screens/setting_screen.dar
 import 'package:chef_app/features/profile/presentions/screens/update_profile_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../../features/auth/presentions/screens/rigester_screen.dart';
+import '../../features/auth/presentions/screens/register_screen.dart';
 
 class Routes {
  static const String initRoute="/";
