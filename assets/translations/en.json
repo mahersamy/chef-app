@@ -25,6 +25,7 @@
   "code": "Code",
   "description": "Write some Description",
   "confirm": "Confirm",
+  "please_enter_code": "Please Enter valid Code",
   "please_enter_email": "Please Enter valid E-mail",
   "please_enter_valid_password": "Please Enter valid password",
   "please_enter_phone": "Please Enter valid Phone Number",

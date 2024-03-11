@@ -26,6 +26,7 @@
   "editProfile": "تعديل الملف الشخصي",
   "loginSucessfully": "تم تسجيل الدخول بنجاح",
   "loginFailed": "حدث خطأ حاول مرة أخري",
+  "please_enter_code": "من فضلك أدخل كود صالح",
   "please_enter_email": "من فضلك أدخل بريد الكتروني صالح",
   "please_enter_valid_password": "من فضلك أدخل كلمة سر صالحة",
   "please_enter_phone": "من فضلك أدخل رقم هاتف صالح",

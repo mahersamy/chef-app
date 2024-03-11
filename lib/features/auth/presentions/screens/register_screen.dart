@@ -3,7 +3,9 @@ import 'package:chef_app/core/shared_widgets/custom_button.dart';
 import 'package:chef_app/core/shared_widgets/person_image_widgets.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
 import 'package:chef_app/core/utlis/app_strings.dart';
+import 'package:chef_app/features/auth/logic/cubit/register_cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/commen/commen.dart';
@@ -16,17 +18,10 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailEditingController = TextEditingController();
-    TextEditingController passwordEditingController = TextEditingController();
-    TextEditingController confirmPasswordEditingController = TextEditingController();
-    TextEditingController nameEditingController = TextEditingController();
-    TextEditingController phoneEditingController = TextEditingController();
-    TextEditingController desEditingController = TextEditingController();
-    TextEditingController minEditingController = TextEditingController();
-
-
     return Scaffold(
-      body: Stack(
+      body: BlocBuilder<RegisterCubit, RegisterState>(
+  builder: (context, state) {
+    return Stack(
         children: [
           Container(
             height: 180.h,
@@ -42,12 +37,13 @@ class RegisterScreen extends StatelessWidget {
                 )),
           ),
           Form(
+            key: BlocProvider.of<RegisterCubit>(context).registerFormKey,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0).w,
               child: Column(
                 children: [
                   SizedBox(
-                    height: 300.h,
+                    height: 200.h,
                   ),
                   Expanded(
                     child: SingleChildScrollView(
@@ -59,12 +55,12 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.email.tr(context),
-                            controller: emailEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).emailEditingController,
                             validation: (value) {
                               if (value == null ||
                                   value.trim().isEmpty ||
                                   value.contains("@") == false) {
-                                return AppStrings.pleaseEnterValidEmail.trim();
+                                return AppStrings.pleaseEnterValidEmail.tr(context);
                               }
                             },
                           ),
@@ -73,9 +69,10 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.password.tr(context),
-                            controller: passwordEditingController,
-                            isPassword: true,
-                            icon: Icons.remove_red_eye,
+                            controller: BlocProvider.of<RegisterCubit>(context).passwordEditingController,
+                            isPassword: BlocProvider.of<RegisterCubit>(context).isPasswordHidden,
+                            icon: BlocProvider.of<RegisterCubit>(context).passwordIcon,
+                            suffixIconOnPressed: BlocProvider.of<RegisterCubit>(context).switchHiddenPassword,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty||value.length<6){
                                 return AppStrings.pleaseEnterValidPassword.tr(context);
@@ -87,9 +84,8 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.confirmPassword.tr(context),
-                            controller: confirmPasswordEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).confirmPasswordEditingController,
                             isPassword: true,
-                            icon: Icons.remove_red_eye,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty||value.length<6){
                                 return AppStrings.pleaseEnterValidPassword.tr(context);
@@ -101,7 +97,8 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.phoneNumber.tr(context),
-                            controller: phoneEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).phoneEditingController,
+                            textInputType: TextInputType.number,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty||value.length<8){
                                 return AppStrings.pleaseEnterValidNumber.tr(context);
@@ -113,7 +110,7 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.name.tr(context),
-                            controller: nameEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).nameEditingController,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty){
                                 return AppStrings.pleaseEnterValidName.tr(context);
@@ -125,10 +122,10 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.brandName.tr(context),
-                            controller: nameEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).brandNameEditingController,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty){
-                                return AppStrings.pleaseEnterValidName.tr(context);
+                                return AppStrings.pleaseEnterValidBrandName.tr(context);
                               }
                             },
                           ),
@@ -137,10 +134,10 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.description.tr(context),
-                            controller: desEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).desEditingController,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty){
-                                return AppStrings.pleaseEnterValidName.tr(context);
+                                return AppStrings.pleaseEnterValidDesc.tr(context);
                               }
                             },
                           ),
@@ -149,10 +146,11 @@ class RegisterScreen extends StatelessWidget {
                           ),
                           CustomField(
                             hintText: AppStrings.minCharge.tr(context),
-                            controller: minEditingController,
+                            controller: BlocProvider.of<RegisterCubit>(context).minEditingController,
+                            textInputType: TextInputType.number,
                             validation: (value) {
                               if(value==null||value.trim().isEmpty){
-                                return AppStrings.pleaseEnterValidName.tr(context);
+                                return AppStrings.pleaseEnterValidNumber.tr(context);
                               }
                             },
                           ),
@@ -160,7 +158,10 @@ class RegisterScreen extends StatelessWidget {
                           SizedBox(
                             height: 64.h,
                           ),
-                          CustomButton(text: AppStrings.signUp.tr(context)),
+                          CustomButton(text: AppStrings.signUp.tr(context),onPressed: ()=> BlocProvider.of<RegisterCubit>(context)
+                                .registerFormKey
+                                .currentState!
+                                .validate()),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -171,7 +172,7 @@ class RegisterScreen extends StatelessWidget {
                               ),
                               TextButton(
                                   onPressed: () {
-                                    navigator(context: context, route: Routes.loginScreen);
+                                    navigatorReplacement(context: context, route: Routes.loginScreen);
                                   },
                                   child: Text(
                                     AppStrings.signIn.tr(context),
@@ -192,7 +193,9 @@ class RegisterScreen extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      );
+  },
+),
     );
   }
 }

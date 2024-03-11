@@ -4,13 +4,10 @@ import 'package:chef_app/core/helpers/cache_helper.dart';
 import 'package:chef_app/core/local/app_locale.dart';
 import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/core/theme/app_theme.dart';
-import 'package:chef_app/features/auth/presentions/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import 'features/auth/presentions/screens/splash_screen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

@@ -33,13 +33,14 @@ class AppStrings {
   static const String pleaseEnterValidPhone = 'please_enter_phone';
   static const String pleaseEnterValidName = 'please_enter_name';
   static const String pleaseEnterValidBrandName = 'please_enter_brandName';
+  static const String pleaseEnterValidCode="please_enter_code";
   static const String yes = 'yes';
   static const String no = 'no';
   static const String pleaseEnterValidDesc = 'please_enter_desc';
   static const String le = 'le';
   static const String dontHaveAnAccount = 'dontHaveAnAccount';
   static const String checkMail = 'checkMail';
-  static const String pleaseEnterValidCode = 'pleaseEnterValidCode';
+  // static const String pleaseEnterValidCode = 'pleaseEnterValidCode';
   static const String passwordChangedSucessfully = 'PasswordChangedSucessfully';
   static const String pleaseEnterValidNumber = 'pleaseEnterValidNumber';
   static const String menu = 'menu';
