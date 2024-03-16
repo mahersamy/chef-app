@@ -26,7 +26,7 @@ class AppStrings {
   static const String code = 'code';
   static const String createYourNewPassword = 'createYourNewPassword';
   static const String description = 'description';
-  static const String loginSucessfully = 'loginSucessfully';
+  static const String loginSuccessfully = 'loginSuccessfully';
   static const String loginFailed = 'loginFailed';
   static const String pleaseEnterValidEmail = 'please_enter_email';
   static const String pleaseEnterValidPassword = 'please_enter_valid_password';
@@ -34,6 +34,30 @@ class AppStrings {
   static const String pleaseEnterValidName = 'please_enter_name';
   static const String pleaseEnterValidBrandName = 'please_enter_brandName';
   static const String pleaseEnterValidCode="please_enter_code";
+  static const String pleaseEnterValidLocation="please_enter_address";
+
+
+
+  static const String next="next";
+  static const String prev="prev";
+  static const String getImage="person_image";
+  static const String imageQuote="image_quote";
+  static const String setYourLocation="setYourLocation";
+  static const String locationHintText="locationHintText";
+  static const String termsOfOrders="TermsOfOrders";
+
+
+  static const String personInfoText="person_info_text";
+  static const String personHintText="person_hint_text";
+  static const String requiredInfo="required_info";
+
+
+
+
+
+
+
+
   static const String yes = 'yes';
   static const String no = 'no';
   static const String pleaseEnterValidDesc = 'please_enter_desc';

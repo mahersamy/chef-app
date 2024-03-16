@@ -11,6 +11,7 @@
   "name": "Name",
   "dontHaveAccount": "Don’t have an account?",
   "iHaveAccount": "already have an account?",
+  "createAccount":"create account",
   "phone_number": "Phone Number",
   "minCharge": "Minimum Charge",
   "brandName": "Brand Name",
@@ -34,6 +35,23 @@
   "please_enter_social": "Please Enter valid Social Media",
   "please_enter_desc": "Please Enter valid Description",
   "please_enter_brandName": "Please Enter valid Brand Name",
+
+  "next": "next",
+  "prev": "previous",
+  "person_image": "set your logo and your brand",
+  "image_quote": "Choose a picture that is better than a thousand words",
+  "setYourLocation":"Enter your address in detail",
+  "locationHintText": "Governorate. City. Region",
+  "TermsOfOrders": "Terms of orders",
+  "person_info_text": "Can we get to know you more",
+  "person_hint_text": "Write here",
+
+  "required_info": "Required Files",
+
+
+
+
+
   "yes": "yes",
   "no": "no",
   "le": "L.E",

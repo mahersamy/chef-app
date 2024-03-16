@@ -49,7 +49,9 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: 'Chef app',
                 theme: getAppTheme(),
+                initialRoute: Routes.mainRegisterScreen,
                 onGenerateRoute: appRoute.generateRoute,
+
                 // home:LoginScreen(),
               );
             },

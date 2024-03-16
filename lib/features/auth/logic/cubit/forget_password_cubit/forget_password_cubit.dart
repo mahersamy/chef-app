@@ -13,8 +13,7 @@ class ForgetPasswordCubit extends Cubit<ForgetPasswordState> {
   GlobalKey<FormState> emailPasswordFormKey = GlobalKey<FormState>();
   TextEditingController emailEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
-  TextEditingController confirmPasswordEditingController =
-      TextEditingController();
+  TextEditingController confirmPasswordEditingController = TextEditingController();
   TextEditingController codeEditingController = TextEditingController();
   bool isPasswordHidden = true;
   IconData passwordIcon = Icons.visibility;

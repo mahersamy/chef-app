@@ -1,13 +1,11 @@
 import 'package:chef_app/core/di/dependency_injection.dart';
 import 'package:chef_app/features/auth/logic/cubit/forget_password_cubit/forget_password_cubit.dart';
-import 'package:chef_app/features/auth/logic/cubit/register_cubit/register_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../features/auth/logic/cubit/login_cubit/login_cubit.dart';
 import '../../features/auth/presentions/screens/change_lang_screen.dart';
 import '../../features/auth/presentions/screens/login_screen.dart';
-import '../../features/auth/presentions/screens/register_screen.dart';
 import '../../features/auth/presentions/screens/reset_password_screen.dart';
 import '../../features/auth/presentions/screens/send_code_screen.dart';
 import '../../features/auth/presentions/screens/splash_screen.dart';
@@ -17,9 +15,11 @@ import '../../features/profile/presentions/screens/change_password_screens.dart'
 import '../../features/profile/presentions/screens/profile_screen.dart';
 import '../../features/profile/presentions/screens/setting_screen.dart';
 import '../../features/profile/presentions/screens/update_profile_screen.dart';
+import '../../features/signup/logic/register_cubit/register_cubit.dart';
+import '../../features/signup/presentions/screens/main_register_screen.dart';
 
 class Routes {
-  static const String initRoute = "/";
+  static const String initRoute = "/splash";
 
   //authRoute
 
@@ -28,6 +28,7 @@ class Routes {
   static const String sendCodeScreen = "/sendCodeScreen";
   static const String loginScreen = "/loginScreen";
   static const String registerScreen = "/register";
+  static const String mainRegisterScreen = "/";
 
   //menuScreen
 
@@ -70,11 +71,18 @@ class AppRoute {
             child: const LoginScreen(),
           ),
         );
-      case Routes.registerScreen:
+      // case Routes.registerScreen:
+      //   return MaterialPageRoute(
+      //     builder: (_) => BlocProvider(
+      //       create: (BuildContext context) => getIt<RegisterCubit>(),
+      //       child: const RegisterScreen(),
+      //     ),
+      //   );
+      case Routes.mainRegisterScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
-            create: (BuildContext context) => getIt<RegisterCubit>(),
-            child: const RegisterScreen(),
+            create: (BuildContext context) => getIt<SignUpCubit>(),
+            child: MainRegisterScreen(),
           ),
         );
       case Routes.addMenuScreen:
@@ -90,5 +98,6 @@ class AppRoute {
       case Routes.updateProfileScreen:
         return MaterialPageRoute(builder: (_) => const UpdateProfileScreen());
     }
+    return null;
   }
 }

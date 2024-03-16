@@ -9,6 +9,7 @@
   "name": "الاسم",
   "dontHaveAccount": "انا لا املك حساب",
   "iHaveAccount": "انا املك حساب مسبقا",
+  "createAccount": "انشاء حساب",
   "phone_number": "رقم الهاتف",
   "password": "كلمة المرور",
   "minCharge": "الحد الأدنى للطلب",
@@ -35,6 +36,21 @@
   "please_enter_social": "من فضلك أدخل رابط تواصل اجتماعي صالح",
   "please_enter_desc": "من فضلك أدخل وصف صالح",
   "please_enter_brandName": "الرجاء إدخال اسم علامة تجارية صالح",
+
+
+  "next": "التالي",
+  "prev": "السابق",
+  "person_image": "الشعار او الصوره الشخصيه",
+  "image_quote": "اختر صورة احسن من الف كلمة",
+  "setYourLocation": "ادخل عنوانك بلتفصيل",
+  "locationHintText": "المحافظة.المدينة.المنطقة",
+  "TermsOfOrders": "شروط الطلبات",
+  "person_info_text": "ممكن نتعرف عليك اكتر",
+  "person_hint_text": "اكتب هنا",
+
+  "required_info": "المستندات المطلوبة",
+
+
 
   "yes": "نعم",
   "no": "لا",

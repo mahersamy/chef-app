@@ -32,7 +32,7 @@ class CustomField extends StatelessWidget {
         suffixIcon: IconButton(
           icon: Icon(
             icon,
-            color: AppColors.black,
+            color: AppColors.primary,
           ),
           onPressed: suffixIconOnPressed,
         ),
