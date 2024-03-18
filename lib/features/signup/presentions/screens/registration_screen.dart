@@ -88,7 +88,7 @@ class RegistrationScreen extends StatelessWidget {
                         controller: BlocProvider.of<SignUpCubit>(context).phoneEditingController,
                         textInputType: TextInputType.number,
                         validation: (value) {
-                          if(value==null||value.trim().isEmpty||value.length<8){
+                          if(value==null||value.trim().isEmpty||value.length<10||value.length>=12){
                             return AppStrings.pleaseEnterValidNumber.tr(context);
                           }
                         },
@@ -102,6 +102,18 @@ class RegistrationScreen extends StatelessWidget {
                         validation: (value) {
                           if(value==null||value.trim().isEmpty){
                             return AppStrings.pleaseEnterValidName.tr(context);
+                          }
+                        },
+                      ),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      CustomField(
+                        hintText: AppStrings.brandName.tr(context),
+                        controller: BlocProvider.of<SignUpCubit>(context).brandNameEditingController,
+                        validation: (value) {
+                          if(value==null||value.trim().isEmpty){
+                            return AppStrings.pleaseEnterValidBrandName.tr(context);
                           }
                         },
                       ),

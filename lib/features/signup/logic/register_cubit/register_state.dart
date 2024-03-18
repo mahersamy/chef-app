@@ -14,7 +14,16 @@ class ChangeIndex extends SignUpState {}
 
 
 class SetImage extends SignUpState {}
-class SignUp extends SignUpState {}
+class SignUpSuccess extends SignUpState {
+  final String message;
+  SignUpSuccess({required this.message});
+}
+class SignUpError extends SignUpState {
+  final String message;
+  SignUpError({required this.message});
+}
+class SignUpLoading extends SignUpState {}
+
 
 
 

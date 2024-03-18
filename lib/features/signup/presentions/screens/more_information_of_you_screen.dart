@@ -33,7 +33,7 @@ class DecumentsScreen extends StatelessWidget {
             ),
             CustomField(
               validation: (value) {
-                if (value == null || value.trim().isEmpty) {
+                if (value == null || value.trim().isEmpty && value.length < 20) {
                   return AppStrings.pleaseEnterValidDesc.tr(context);
                 }
               },

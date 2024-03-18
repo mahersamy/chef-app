@@ -11,9 +11,6 @@ import '../../presentions/screens/registration_screen.dart';
 import '../../presentions/screens/upload_profile_image_screen.dart';
 
 
-
-
-
 part 'register_state.dart';
 
 class SignUpCubit extends Cubit<SignUpState> {
@@ -25,7 +22,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
   GlobalKey<FormState> locationFormKey = GlobalKey<FormState>();
-  GlobalKey<FormState>  decumentFormKey= GlobalKey<FormState>();
+  GlobalKey<FormState> decumentFormKey = GlobalKey<FormState>();
 
 
   TextEditingController emailEditingController = TextEditingController();
@@ -44,11 +41,10 @@ class SignUpCubit extends Cubit<SignUpState> {
   bool isConfirmPasswordHidden = true;
   IconData confirmPasswordIcon = Icons.visibility;
   XFile? image;
-  XFile? frontIdDecument;
-  XFile? backIdDecumnet;
-  XFile? healthCertificateIdDecumnet;
+  XFile? frontId;
+  XFile? backId;
+  XFile? healthCertificateId;
   int index = 0;
-
 
 
   void switchHiddenPassword() {
@@ -74,7 +70,6 @@ class SignUpCubit extends Cubit<SignUpState> {
   //main register screen
 
 
-
   List<Widget> pages = <Widget>[
     const RegistrationScreen(),
     const UploadProfileImage(),
@@ -84,51 +79,90 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void next() {
     index++;
-    pageController.nextPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    pageController.nextPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.ease);
     emit(Next());
   }
 
   void prev() {
     index--;
-    pageController.previousPage(duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    pageController.previousPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.ease);
     emit(Prev());
   }
 
   void onIndexChange(int index) {
     this.index = index;
-    pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
+    pageController.animateToPage(
+        index, duration: const Duration(milliseconds: 500), curve: Curves.ease);
     emit(ChangeIndex());
   }
 
-  void imagePicker(TypeOfImage typeOfImage)async{
-    switch(typeOfImage){
+  void imagePicker(TypeOfImage typeOfImage) async {
+    switch (typeOfImage) {
       case TypeOfImage.PresonalImage:
         image = await picker.pickImage(source: ImageSource.gallery);
-        image!=null?showSuccessToast("Image selected"):showErrorToast("Image not selected");
+        image != null ? showSuccessToast("Image selected") : showErrorToast(
+            "Image not selected");
         break;
       case TypeOfImage.HealthCertificate:
-        healthCertificateIdDecumnet = await picker.pickImage(source: ImageSource.gallery);
-        healthCertificateIdDecumnet!=null?showSuccessToast("Health Certificate selected"):showErrorToast("Health Certificate not selected");
+        healthCertificateId =
+        await picker.pickImage(source: ImageSource.gallery);
+        healthCertificateId != null ? showSuccessToast(
+            "Health Certificate selected") : showErrorToast(
+            "Health Certificate not selected");
         break;
       case TypeOfImage.FrontID:
-        frontIdDecument = await picker.pickImage(source: ImageSource.gallery);
-        frontIdDecument!=null?showSuccessToast("Front ID selected"):showErrorToast("Front ID not selected");
+        frontId = await picker.pickImage(source: ImageSource.gallery);
+        frontId != null
+            ? showSuccessToast("Front ID selected")
+            : showErrorToast("Front ID not selected");
         break;
       case TypeOfImage.BackID:
-        backIdDecumnet = await picker.pickImage(source: ImageSource.gallery);
-        backIdDecumnet!=null?showSuccessToast("back ID selected"):showErrorToast("back ID not selected");
+        backId = await picker.pickImage(source: ImageSource.gallery);
+        backId != null
+            ? showSuccessToast("back ID selected")
+            : showErrorToast("back ID not selected");
         break;
     }
     emit(SetImage());
   }
 
-void signUp(){
-  emit(SignUp());
-}
+  void signUp() async {
+    emit(SignUpLoading());
+    final result = await signUpRepo.signUp(email: emailEditingController.text,
+        password: passwordEditingController.text,
+        confirmPassword: confirmPasswordEditingController.text,
+        name: nameEditingController.text,
+        phone: phoneEditingController.text,
+        desc: desEditingController.text,
+        min: minEditingController.text,
+        brandName: brandNameEditingController.text,
+        locationName: locationNameEditingController.text,
+        image: image!,
+        frontId: frontId!,
+        backId: backId!,
+        healthCertificateId: healthCertificateId!);
+
+    try {
+      result.fold((l) {
+        showErrorToast(l);
+        emit(SignUpError(message: l));
+      }, (r) {
+        showSuccessToast(r);
+        emit(SignUpSuccess(message: r));
+      });
+    } catch (e) {
+      showErrorToast(e.toString());
+      emit(SignUpError(message: e.toString()));
+    }
+
+  }
+
 
 }
 
-enum TypeOfImage{
+enum TypeOfImage {
   PresonalImage,
   HealthCertificate,
   FrontID,

@@ -6,8 +6,7 @@ class EndPoint {
   static const String chefDelete = 'chef/delete';
   static const String chefGet = 'chef/get-chef/';
   static const String sendCode = 'chef/send-code';
-  static const String changeForgottenPassword =
-      'chef/change-forgotten-password';
+  static const String changeForgottenPassword = 'chef/change-forgotten-password';
   static const String updateChef = 'chef/update';
   static const String logout = 'chef/logout';
   static const String addMeal = 'meal/add-to-menu';
@@ -55,6 +54,11 @@ class ApiKeys {
   static const String locationName = 'location';
   static const String phone = 'phone';
   static const String desc = 'disc';
+  static const String image = 'profilePic';
+  static const String frontId = 'frontId';
+  static const String backId = 'backId';
+  static const String healthCertificateId = 'healthCertificate';
+
 
 
 }

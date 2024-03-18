@@ -18,25 +18,27 @@ class LocationAndMinChargeScreen extends StatelessWidget {
       padding: const EdgeInsets.all(15.0).w,
       child: Form(
         key: BlocProvider.of<SignUpCubit>(context).locationFormKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(AppStrings.setYourLocation.tr(context),style: Theme.of(context).textTheme.displayMedium!.copyWith(color: AppColors.black),),
-            SizedBox(height: 16.h,),
-            CustomField(hintText: AppStrings.locationHintText.tr(context), controller: BlocProvider.of<SignUpCubit>(context).locationNameEditingController,validation: (value){
-              if(value==null||value.trim().isEmpty){
-                return AppStrings.pleaseEnterValidLocation.tr(context);
-              }
-            },),
-            SizedBox(height: 40.h,),
-            Text(AppStrings.termsOfOrders.tr(context),style: Theme.of(context).textTheme.displayMedium!.copyWith(color: AppColors.black),),
-            SizedBox(height: 16.h,),
-            CustomField(hintText: AppStrings.minCharge.tr(context), controller: BlocProvider.of<SignUpCubit>(context).minEditingController,validation: (value){
-              if(value==null||value.trim().isEmpty){
-                return AppStrings.pleaseEnterValidNumber.tr(context);
-              }
-            }),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(AppStrings.setYourLocation.tr(context),style: Theme.of(context).textTheme.displayMedium!.copyWith(color: AppColors.black),),
+              SizedBox(height: 16.h,),
+              CustomField(hintText: AppStrings.locationHintText.tr(context), controller: BlocProvider.of<SignUpCubit>(context).locationNameEditingController,validation: (value){
+                if(value==null||value.trim().isEmpty){
+                  return AppStrings.pleaseEnterValidLocation.tr(context);
+                }
+              },),
+              SizedBox(height: 40.h,),
+              Text(AppStrings.termsOfOrders.tr(context),style: Theme.of(context).textTheme.displayMedium!.copyWith(color: AppColors.black),),
+              SizedBox(height: 16.h,),
+              CustomField(hintText: AppStrings.minCharge.tr(context), controller: BlocProvider.of<SignUpCubit>(context).minEditingController,validation: (value){
+                if(value==null||value.trim().isEmpty){
+                  return AppStrings.pleaseEnterValidNumber.tr(context);
+                }
+              }),
+            ],
+          ),
         ),
       ),
     );

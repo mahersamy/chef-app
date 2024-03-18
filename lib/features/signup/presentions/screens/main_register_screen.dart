@@ -14,7 +14,14 @@ class MainRegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
+    return BlocConsumer<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if(state is SignUpError){
+
+        }else if(state is SignUpSuccess){
+
+        }
+      },
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
@@ -25,7 +32,7 @@ class MainRegisterScreen extends StatelessWidget {
             children: [
               IconStepper(
                 lineLength: 40,
-                enableStepTapping: true,
+                enableStepTapping: false,
                 enableNextPreviousButtons: false,
                 onStepReached: (index) {
                   BlocProvider.of<SignUpCubit>(context).onIndexChange(index);
@@ -41,9 +48,9 @@ class MainRegisterScreen extends StatelessWidget {
               ),
               Expanded(
                 child: PageView.builder(
-                  controller:
-                      BlocProvider.of<SignUpCubit>(context).pageController,
+                  controller: BlocProvider.of<SignUpCubit>(context).pageController,
                   reverse: false,
+                  physics: const NeverScrollableScrollPhysics(),
                   itemBuilder: (context, index) {
                     return BlocProvider.of<SignUpCubit>(context).pages[index];
                   },
@@ -61,16 +68,11 @@ class MainRegisterScreen extends StatelessWidget {
                       width: 150.h,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (BlocProvider.of<SignUpCubit>(context).decumentFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).decumentFormKey.currentState!.validate()&&BlocProvider.of<SignUpCubit>(context).index == 3) {
-                            if(BlocProvider.of<SignUpCubit>(context).frontIdDecument==null){
-                              showErrorToast("please enter front id");
-                            }else if(BlocProvider.of<SignUpCubit>(context).backIdDecumnet==null){
-                              showErrorToast("please enter back id");
-                            }else if(BlocProvider.of<SignUpCubit>(context).healthCertificateIdDecumnet==null){
-                              showErrorToast("please enter health certificate id");
-                            }else{
-                              BlocProvider.of<SignUpCubit>(context).signUp();
-                            }
+                          if (BlocProvider.of<SignUpCubit>(context).registrationFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).registrationFormKey.currentState!.validate()) {
+                          BlocProvider.of<SignUpCubit>(context).next();
+                          }
+                          else if (BlocProvider.of<SignUpCubit>(context).locationFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).locationFormKey.currentState!.validate()) {
+                            BlocProvider.of<SignUpCubit>(context).next();
                           }
                           else if (BlocProvider.of<SignUpCubit>(context).index == 1) {
                             if (BlocProvider.of<SignUpCubit>(context).image ==
@@ -80,15 +82,19 @@ class MainRegisterScreen extends StatelessWidget {
                               BlocProvider.of<SignUpCubit>(context).next();
                             }
                           }
-                          else if (BlocProvider.of<SignUpCubit>(context).registrationFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).registrationFormKey.currentState!.validate()) {
-                            BlocProvider.of<SignUpCubit>(context).next();
+                          else if (BlocProvider.of<SignUpCubit>(context).decumentFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).decumentFormKey.currentState!.validate()&&BlocProvider.of<SignUpCubit>(context).index == 3) {
+                            if(BlocProvider.of<SignUpCubit>(context).frontId==null){
+                              showErrorToast("please enter front id");
+                            }else if(BlocProvider.of<SignUpCubit>(context).backId==null){
+                              showErrorToast("please enter back id");
+                            }else if(BlocProvider.of<SignUpCubit>(context).healthCertificateId==null){
+                              showErrorToast("please enter health certificate id");
+                            }else{
+                              BlocProvider.of<SignUpCubit>(context).signUp();
+                            }
                           }
-                          else if (BlocProvider.of<SignUpCubit>(context).locationFormKey.currentState != null && BlocProvider.of<SignUpCubit>(context).locationFormKey.currentState!.validate()) {
-                            BlocProvider.of<SignUpCubit>(context).next();
-                          }
-                          else {
-                            print("not validated");
-                          }
+
+
                         },
                         child: Text(AppStrings.next.tr(context),
                             style: Theme.of(context).textTheme.displayMedium),
