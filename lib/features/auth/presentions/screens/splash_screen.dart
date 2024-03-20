@@ -1,12 +1,16 @@
 import 'package:chef_app/core/local/app_locale.dart';
-import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/core/utlis/app_assets.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
 import 'package:chef_app/core/utlis/app_strings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+
 import '../../../../core/commen/commen.dart';
+import '../../../../core/di/dependency_injection.dart';
+import '../../../../core/helpers/cache_helper.dart';
+import '../../../../core/networking/end_points.dart';
+import '../../../../core/routes/app_route.dart';
 import '../../../../core/shared_widgets/custom_image.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -26,7 +30,13 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToNextScreen(){
-    Future.delayed(const Duration(seconds: 1)).then((value) => navigator(context: context,route: Routes.changeLangScreen));
+    Future.delayed(const Duration(seconds: 3)).then((value) {
+      if(getIt<CacheHelper>().getData(key: ApiKeys.token)!=null){
+        navigatorReplacement(context: context, route: Routes.homeScreen);
+      }else{
+        navigatorReplacement(context: context, route: Routes.loginScreen);
+      }
+    });
   }
 
   @override

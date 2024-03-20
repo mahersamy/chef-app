@@ -1,5 +1,6 @@
 
 
+import 'package:chef_app/features/home/logic/cubit/home_cubit.dart';
 import 'package:chef_app/features/signup/data/repository/signup_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -21,6 +22,7 @@ void setupGetIt(){
   getIt.registerLazySingleton(() => LoginCubit(getIt()));
   getIt.registerLazySingleton(() => SignUpCubit(getIt(), getIt()));
   getIt.registerLazySingleton(() => ForgetPasswordCubit(getIt()));
+  getIt.registerLazySingleton(() => HomeCubit());
   
   
   //repos

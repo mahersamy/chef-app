@@ -9,6 +9,8 @@ import '../../features/auth/presentions/screens/login_screen.dart';
 import '../../features/auth/presentions/screens/reset_password_screen.dart';
 import '../../features/auth/presentions/screens/send_code_screen.dart';
 import '../../features/auth/presentions/screens/splash_screen.dart';
+import '../../features/home/logic/cubit/home_cubit.dart';
+import '../../features/home/presentions/screens/home_screen.dart';
 import '../../features/menu/presentions/screens/add_menu_screen.dart';
 import '../../features/menu/presentions/screens/menu_home.dart';
 import '../../features/profile/presentions/screens/change_password_screens.dart';
@@ -28,7 +30,7 @@ class Routes {
   static const String sendCodeScreen = "/sendCodeScreen";
   static const String loginScreen = "/loginScreen";
   static const String registerScreen = "/register";
-  static const String mainRegisterScreen = "/";
+  static const String mainRegisterScreen = "/mainRegisterScreen";
 
   //menuScreen
 
@@ -41,6 +43,10 @@ class Routes {
   static const String profileScreen = "/profileScreen";
   static const String settingScreen = "/settingScreen";
   static const String updateProfileScreen = "/updateProfileScreen";
+
+  //home
+
+  static const String homeScreen = "/homeScreen";
 }
 
 class AppRoute {
@@ -50,6 +56,12 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case Routes.changeLangScreen:
         return MaterialPageRoute(builder: (_) => const ChangeLangScreen());
+      case Routes.homeScreen:
+        return MaterialPageRoute(
+            builder: (_) => BlocProvider(
+                  create: (BuildContext context) => getIt<HomeCubit>(),
+                  child: const HomeScreen(),
+                ));
       case Routes.resetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
@@ -71,13 +83,6 @@ class AppRoute {
             child: const LoginScreen(),
           ),
         );
-      // case Routes.registerScreen:
-      //   return MaterialPageRoute(
-      //     builder: (_) => BlocProvider(
-      //       create: (BuildContext context) => getIt<RegisterCubit>(),
-      //       child: const RegisterScreen(),
-      //     ),
-      //   );
       case Routes.mainRegisterScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
