@@ -24,9 +24,10 @@ class LoginScreen extends StatelessWidget {
       body: BlocConsumer<LoginCubit, LoginState>(
         listener: (context, state) {
           if (state is LoginSuccessState) {
-            print("LoginSuccessState");
+            showSuccessToast("login success");
+            navigatorReplacement(context: context, route: Routes.homeScreen);
           } else if (state is LoginErrorState) {
-            print("error");
+            showErrorToast(state.error);
           }
         },
         builder: (context, state) {
@@ -98,7 +99,7 @@ class LoginScreen extends StatelessWidget {
                         Row(
                           children: [
                             TextButton(
-                                onPressed: () => navigatorReplacement(
+                                onPressed: () => navigator(
                                     context: context,
                                     route: Routes.sendCodeScreen),
                                 child: Text(
@@ -130,7 +131,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         // if (state is LoginLoadingState) const CustomCircular(),
                         SizedBox(
-                          height: 72.h,
+                          height: 10.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -138,9 +139,9 @@ class LoginScreen extends StatelessWidget {
                             Text(AppStrings.dontHaveAccount.tr(context)),
                             TextButton(
                               onPressed: () {
-                                navigatorReplacement(
+                                navigator(
                                     context: context,
-                                    route: Routes.registerScreen);
+                                    route: Routes.mainRegisterScreen);
                               },
                               child: Text(
                                 AppStrings.signUp.tr(context),
