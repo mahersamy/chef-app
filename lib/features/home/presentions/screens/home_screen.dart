@@ -13,26 +13,28 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
   builder: (context, state) {
-    return Scaffold(
-      body:BlocProvider.of<HomeCubit>(context).pages[BlocProvider.of<HomeCubit>(context).currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-      backgroundColor: AppColors.white,
-      selectedItemColor: AppColors.primary,
-      currentIndex: BlocProvider.of<HomeCubit>(context).currentIndex,
-      onTap: (BlocProvider.of<HomeCubit>(context).changeScreen),
-      elevation: 10,
-      items:  [
-        const BottomNavigationBarItem(
-          icon: Icon(Icons.person_2_outlined,size: 30,),
-          label: 'Profile',),
-        BottomNavigationBarItem(
-          icon: const Icon(Icons.home,size: 30,),
-          label: AppStrings.editProfile.tr(context),
-        ),
-
-      ],
-
-    ),
+    return SafeArea(
+      child: Scaffold(
+        body:BlocProvider.of<HomeCubit>(context).pages[BlocProvider.of<HomeCubit>(context).currentIndex],
+        bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: AppColors.white,
+        selectedItemColor: AppColors.primary,
+        currentIndex: BlocProvider.of<HomeCubit>(context).currentIndex,
+        onTap: (BlocProvider.of<HomeCubit>(context).changeScreen),
+        elevation: 10,
+        items:  [
+          const BottomNavigationBarItem(
+            icon: Icon(Icons.person_2_outlined,size: 30,),
+            label: 'Profile',),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home,size: 30,),
+            label: AppStrings.editProfile.tr(context),
+          ),
+      
+        ],
+      
+      ),
+      ),
     );
   },
 );
