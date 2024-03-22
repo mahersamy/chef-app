@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: 'Chef app',
                 theme: getAppTheme(),
-                initialRoute: Routes.initRoute,
+                initialRoute: Routes.homeScreen,
                 onGenerateRoute: appRoute.generateRoute,
 
                 // home:LoginScreen(),
