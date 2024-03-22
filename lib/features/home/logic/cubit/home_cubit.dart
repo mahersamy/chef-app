@@ -11,7 +11,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
 
-  List<Widget> pages = [ const ProfileScreen(),const MenuScreen()];
+  List<Widget> pages = [ const ProfileScreen(),const MenuHomeScreen()];
   int currentIndex = 1;
 
   void changeScreen(int index) {
