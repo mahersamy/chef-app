@@ -59,8 +59,13 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const ChangeLangScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (BuildContext context) => getIt<HomeCubit>(),
+            builder: (_) => MultiBlocProvider(
+                  providers: [BlocProvider<HomeCubit>(
+                    create: (context) => getIt<HomeCubit>(), // Initialize your FirstBloc
+                  ),
+                    BlocProvider<MenuCubit>(
+                      create: (context) => getIt<MenuCubit>(), // Initialize your SecondBloc
+                    ),],
                   child: const HomeScreen(),
                 ));
       case Routes.resetPasswordScreen:
@@ -92,9 +97,9 @@ class AppRoute {
           ),
         );
       case Routes.addMenuScreen:
-        return MaterialPageRoute(builder: (_) => BlocProvider(create: (BuildContext context) => getIt<MenuCubit>(),child: const AddMenuScreen(),));
+        return MaterialPageRoute(builder: (_) => const AddMenuScreen());
       case Routes.menuHome:
-        return MaterialPageRoute(builder: (_) => BlocProvider(create: (BuildContext context) => getIt<MenuCubit>(),child: const MenuHomeScreen(),));
+        return MaterialPageRoute(builder: (_) => const MenuHomeScreen());
       case Routes.changePasswordScreen:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case Routes.profileScreen:

@@ -1,15 +1,18 @@
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/features/menu/data/models/meal_models.dart';
+import 'package:chef_app/features/menu/data/repository/menu_repo.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
 
 part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
-  MenuCubit(this.imagePicker) : super(MenuInitial());
+  MenuCubit(this.imagePicker, this.menuRepo) : super(MenuInitial());
   final ImagePicker imagePicker;
+  final MenuRepo menuRepo;
+  MealModels? mealModels;
 
   HowToSell howToSell = HowToSell.number;
   List<DropDownValueModel> categories = const [
@@ -118,13 +121,27 @@ class MenuCubit extends Cubit<MenuState> {
   TextEditingController nameEditingController = TextEditingController();
   TextEditingController priceEditingController = TextEditingController();
   TextEditingController descEditingController = TextEditingController();
-  SingleValueDropDownController categoryEditingController = SingleValueDropDownController();
+  SingleValueDropDownController categoryEditingController =
+      SingleValueDropDownController();
 
   XFile? mealImage;
 
   void changeHowToSell(HowToSell? newHowToSell) {
     howToSell = newHowToSell!;
     emit(MenuInitial());
+  }
+
+  void getMeals() {
+    emit(GetMealsLoading());
+    menuRepo.getAllMeals().then((value) {
+      value.fold((l) {
+        emit(GetMealsError());
+      }, (r) {
+        mealModels = r;
+        emit(GetMealsSuccess());
+      });
+
+    });
   }
 }
 
