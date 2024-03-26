@@ -3,7 +3,10 @@ import 'package:chef_app/core/shared_widgets/custom_progress.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
 import 'package:chef_app/features/menu/data/models/meal_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../logic/cubit/menu_cubit.dart';
 
 class MealItem extends StatelessWidget {
   const MealItem({super.key, required this.mealModel});
@@ -57,7 +60,9 @@ class MealItem extends StatelessWidget {
         ),
         const Spacer(),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<MenuCubit>(context).deleteMeal(mealModel.id);
+            },
             icon: const Icon(
               Icons.cancel,
               size: 50,

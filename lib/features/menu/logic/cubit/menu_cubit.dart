@@ -6,12 +6,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/commen/commen.dart';
+
 part 'menu_state.dart';
 
 class MenuCubit extends Cubit<MenuState> {
-  MenuCubit(this.imagePicker, this.menuRepo) : super(MenuInitial());
-  final ImagePicker imagePicker;
+  MenuCubit( this.menuRepo, this.picker)
+      : super(MenuInitial());
+
   final MenuRepo menuRepo;
+  final ImagePicker picker;
+
   MealModels? mealModels;
 
   HowToSell howToSell = HowToSell.number;
@@ -31,10 +36,6 @@ class MenuCubit extends Cubit<MenuState> {
     DropDownValueModel(
       name: "Seafood",
       value: "Seafood",
-    ),
-    DropDownValueModel(
-      name: "Pork",
-      value: "Pork",
     ),
     DropDownValueModel(
       name: "Lamb",
@@ -140,9 +141,61 @@ class MenuCubit extends Cubit<MenuState> {
         mealModels = r;
         emit(GetMealsSuccess());
       });
-
     });
   }
+
+  void deleteMeal(String id) {
+    menuRepo.deleteMeal(id).then((value) {
+      value.fold((l) {
+        emit(DeleteMealsError());
+      }, (r) {
+        getMeals();
+        emit(DeleteMealsSuccess());
+      });
+    });
+  }
+
+  void imagePicker() async {
+    mealImage = await picker.pickImage(source: ImageSource.gallery);
+    mealImage != null
+        ? showSuccessToast("Image selected")
+        : showErrorToast("Image not selected");
+    emit(MenuInitial());
+  }
+
+
+
+
+
+  void addMeal() {
+   if(mealImage==null){
+     showErrorToast("Please select image");
+   }else{
+     if (addMealFormKey.currentState!.validate()) {
+       emit(AddMealsLoading());
+       menuRepo.addMeal(
+         name: nameEditingController.text,
+         description: descEditingController.text,
+         price: priceEditingController.text,
+         image: mealImage!,
+         howToSell: howToSell.name,
+         category: categoryEditingController.dropDownValue!.name,).then((value) {
+         value.fold((l) {
+           showErrorToast(l);
+           emit(AddMealsError());
+         }, (r) {
+           getMeals();
+           emit(AddMealsSuccess());
+         });
+       });
+
+     }
+   }
+  }
+
+
+
+
 }
 
-enum HowToSell { number, quality }
+enum HowToSell { number, quantity }

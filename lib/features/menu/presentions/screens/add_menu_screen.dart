@@ -1,5 +1,8 @@
+import 'package:chef_app/core/commen/commen.dart';
 import 'package:chef_app/core/local/app_locale.dart';
+import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/features/menu/logic/cubit/menu_cubit.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/shared_widgets/custom_button.dart';
 import '../../../../core/shared_widgets/custom_input.dart';
+import '../../../../core/shared_widgets/custom_progress.dart';
 import '../../../../core/shared_widgets/person_image_widgets.dart';
 import '../../../../core/utlis/app_strings.dart';
 
@@ -19,7 +23,14 @@ class AddMenuScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(AppStrings.addToMenu.tr(context)),
       ),
-      body: BlocBuilder<MenuCubit, MenuState>(
+      body: BlocConsumer<MenuCubit, MenuState>(
+        listener: (context, state) {
+          if (state is AddMealsSuccess) {
+           navigatorReplacement(context: context, route: Routes.homeScreen);
+          }else if (state is AddMealsError) {
+            showErrorToast("Error");
+          }
+        },
         builder: (context, state) {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0).w,
@@ -29,7 +40,8 @@ class AddMenuScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     PersonImagePicker(
-                      onTap: () {},
+                      image:BlocProvider.of<MenuCubit>(context).mealImage ,
+                      onTap: BlocProvider.of<MenuCubit>(context).imagePicker,
                     ),
                     SizedBox(
                       height: 24.h,
@@ -52,12 +64,11 @@ class AddMenuScreen extends StatelessWidget {
                       hintText: AppStrings.mealNumber.tr(context),
                       controller: BlocProvider.of<MenuCubit>(context)
                           .priceEditingController,
-                      isPassword: true,
+                      textInputType: TextInputType.number,
                       validation: (value) {
                         if (value == null ||
-                            value.trim().isEmpty ||
-                            value.length < 6) {
-                          return AppStrings.pleaseEnterValidMealPrice
+                            value.trim().isEmpty) {
+                          return AppStrings.pleaseEnterValidNumber
                               .tr(context);
                         }
                       },
@@ -69,12 +80,10 @@ class AddMenuScreen extends StatelessWidget {
                       hintText: AppStrings.description.tr(context),
                       controller: BlocProvider.of<MenuCubit>(context)
                           .descEditingController,
-                      textInputType: TextInputType.number,
                       validation: (value) {
                         if (value == null ||
-                            value.trim().isEmpty ||
-                            value.length < 10) {
-                          return AppStrings.pleaseEnterValidDesc.tr(context);
+                            value.trim().isEmpty) {
+                          return AppStrings.pleaseEnterValidMealDesc.tr(context);
                         }
                       },
                     ),
@@ -105,14 +114,14 @@ class AddMenuScreen extends StatelessWidget {
                             groupValue:
                             BlocProvider.of<MenuCubit>(context).howToSell,
                             onChanged: BlocProvider.of<MenuCubit>(context).changeHowToSell,
-                          
-                          
+
+
                           ),
                         ),
                         Expanded(
                           child: RadioListTile(
                             title: Text(AppStrings.mealQuantity.tr(context)),
-                            value: HowToSell.quality,
+                            value: HowToSell.quantity,
                             groupValue:
                             BlocProvider.of<MenuCubit>(context).howToSell,
                             onChanged: BlocProvider.of<MenuCubit>(context).changeHowToSell,
@@ -124,15 +133,15 @@ class AddMenuScreen extends StatelessWidget {
                       height:50.h,
                     ),
 
-                    CustomButton(
-                      text: AppStrings.addDishToMenu.tr(context),
-                      onPressed: () {
-                        if (BlocProvider.of<MenuCubit>(context)
-                            .addMealFormKey
-                            .currentState!
-                            .validate()) {
-                        }
-                      },
+                    ConditionalBuilder(
+                      condition:state is! AddMealsLoading,
+                      builder: (context) => CustomButton(
+                        text: AppStrings.addDishToMenu.tr(context),
+                        onPressed: () {
+                         BlocProvider.of<MenuCubit>(context).addMeal();
+                        },
+                      ),
+                      fallback: (context) => const CustomCircular(),
                     ),
                   ],
                 ),

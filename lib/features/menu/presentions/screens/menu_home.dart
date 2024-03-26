@@ -55,7 +55,7 @@ class _MenuHomeScreenState extends State<MenuHomeScreen> {
           ],
         ),
       ),
-      fallback: (context)=>const CustomCircular(),
+      fallback: (context)=>const Center(child: CustomCircular()),
 
     );
   },

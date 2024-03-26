@@ -26,15 +26,19 @@ class MealModel {
   String name;
   String description;
   String price;
+  String id;
+
   MealModel(
       {required this.image,
       required this.name,
       required this.description,
       required this.price,
+      required this.id,
       });
 
   factory MealModel.fromJson(Map<String, dynamic> json) {
     return MealModel(
+      id: json["_id"],
       image: json["images"] != null && json["images"].isNotEmpty ? json["images"][0] : "", // assuming you want the first image
       name: json["name"],
       description: json["description"],
@@ -44,7 +48,8 @@ class MealModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data[ApiKeys.image] = image;
+    data["_id"] = id;
+    data["images"] = image;
     data[ApiKeys.name] =name;
     data[ApiKeys.description] = description;
     data[ApiKeys.price] =price;
