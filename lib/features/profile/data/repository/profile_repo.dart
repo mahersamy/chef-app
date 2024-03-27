@@ -5,6 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/error/exceptions.dart';
+import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/networking/end_points.dart';
 
 class ProfileRepo {
@@ -49,13 +50,30 @@ class ProfileRepo {
       return Left(e.errorModel.errorMessage);
     }
   }
+
+
+  Future<Either<String, String>> logout() async {
+    try {
+      final response = await getIt<ApiConsumer>().post(EndPoint.logout);
+      return Right(response[ApiKeys.message]);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+
+  }
+
+  Future<Either<String, String>> getProfile() async {
+    try {
+      final response = await getIt<ApiConsumer>().get(EndPoint.getChefDataEndPoint(getIt<CacheHelper>().getData(key: ApiKeys.id)));
+
+      return Right(response[ApiKeys.message]);
+    } on ServerException catch (e) {
+      return Left(e.errorModel.errorMessage);
+    }
+  }
+
 }
 
-Future<Either<String, String>> logout() async {
-  try {
-    final response = await getIt<ApiConsumer>().post(EndPoint.logout);
-    return Right(response[ApiKeys.message]);
-  } on ServerException catch (e) {
-    return Left(e.errorModel.errorMessage);
-  }
-}
+
+
+
