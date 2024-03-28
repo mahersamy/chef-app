@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../utlis/app_assets.dart';
 
 
 class CustomImage extends StatelessWidget {

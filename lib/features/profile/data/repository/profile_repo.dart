@@ -7,6 +7,7 @@ import 'package:image_picker/image_picker.dart';
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/helpers/cache_helper.dart';
 import '../../../../core/networking/end_points.dart';
+import '../models/chef_model.dart';
 
 class ProfileRepo {
   Future<Either<String, String>> changePassword(
@@ -62,11 +63,10 @@ class ProfileRepo {
 
   }
 
-  Future<Either<String, String>> getProfile() async {
+  Future<Either<String, Chef>> getProfile() async {
     try {
-      final response = await getIt<ApiConsumer>().get(EndPoint.getChefDataEndPoint(getIt<CacheHelper>().getData(key: ApiKeys.id)));
-
-      return Right(response[ApiKeys.message]);
+      final response = await getIt<ApiConsumer>().get(EndPoint.getChefDataEndPoint(getIt<CacheHelper>().getData(key: ApiKeys.id),),);
+      return Right(Chef.fromJson(response));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }
