@@ -47,7 +47,7 @@ class ChangePasswordCubit extends Cubit<ChangePasswordState> {
     emit(ChangePasswordLoading());
     final result =await profileRepo.changePassword(oldPassword: oldPasswordController.text, newPassword: newPasswordController.text, confirmPassword: confirmPasswordController.text);
     result.fold((l) {
-      emit(ChangePasswordError());
+      emit(ChangePasswordError(error: l));
     }, (r) {
       emit(ChangePasswordSuccess());
     });

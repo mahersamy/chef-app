@@ -25,8 +25,6 @@ void main() async {
       BlocProvider<MenuCubit>(
         create: (context) => getIt<MenuCubit>(), // Initialize your SecondBloc
       ),
-      BlocProvider<ChangePasswordCubit>(
-          create: (BuildContext context) => getIt<ChangePasswordCubit>()),
       BlocProvider<ProfileCubit>(
         create: (context) => getIt<ProfileCubit>(), // Initialize your SecondBloc
       ),

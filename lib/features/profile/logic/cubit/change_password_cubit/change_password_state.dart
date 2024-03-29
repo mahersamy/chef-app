@@ -10,7 +10,10 @@ final class SwitchHiddenForget extends ChangePasswordState {}
 
 final class ChangePasswordLoading extends ChangePasswordState {}
 final class ChangePasswordSuccess extends ChangePasswordState {}
-final class ChangePasswordError extends ChangePasswordState {}
+final class ChangePasswordError extends ChangePasswordState {
+  final String error;
+  ChangePasswordError({required this.error});
+}
 
 
 

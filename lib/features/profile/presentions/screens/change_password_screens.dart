@@ -23,7 +23,7 @@ class ChangePasswordScreen extends StatelessWidget {
         if (state is ChangePasswordSuccess) {
           navigatorReplacement(context: context, route: Routes.profileScreen);
         } else if (state is ChangePasswordError) {
-          showErrorToast("Error");
+          showErrorToast(state.error);
         }
       },
       builder: (context, state) {

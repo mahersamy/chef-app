@@ -33,7 +33,7 @@ class ProfileRepo {
       required String desc,
       required String min,
       required String brandName,
-      required String locationName,
+
       required XFile image}) async {
     try {
       FormData formData = FormData.fromMap({
@@ -42,7 +42,7 @@ class ProfileRepo {
         ApiKeys.desc: desc,
         ApiKeys.minOrder: min,
         ApiKeys.brandName: brandName,
-        ApiKeys.locationName: locationName,
+        ApiKeys.locationName:{"\"name\":\"cairo\",\"address\":\"cairo\",\"coordinates\":[1214451511,12541845]"},
         ApiKeys.image: await MultipartFile.fromFile(image.path, filename: image.path.split('/').last),
       });
       final response = await getIt<ApiConsumer>().post(EndPoint.updateChef, data: formData);
