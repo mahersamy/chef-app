@@ -1,4 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:chef_app/core/di/dependency_injection.dart';
+import 'package:chef_app/core/helpers/cache_helper.dart';
+import 'package:chef_app/core/networking/end_points.dart';
 import 'package:chef_app/features/menu/data/models/meal_models.dart';
 import 'package:chef_app/features/menu/data/repository/menu_repo.dart';
 import 'package:dropdown_textfield/dropdown_textfield.dart';
@@ -136,6 +139,7 @@ class MenuCubit extends Cubit<MenuState> {
     emit(GetMealsLoading());
     menuRepo.getAllMeals().then((value) {
       value.fold((l) {
+        getIt<CacheHelper>().removeData(key: ApiKeys.token,);
         emit(GetMealsError());
       }, (r) {
         mealModels = r;

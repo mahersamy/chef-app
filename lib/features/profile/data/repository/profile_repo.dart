@@ -16,7 +16,7 @@ class ProfileRepo {
       required String confirmPassword}) async {
     try {
       final response =
-          await getIt<ApiConsumer>().post(EndPoint.chefChangePassword, data: {
+          await getIt<ApiConsumer>().patch(EndPoint.chefChangePassword, data: {
         ApiKeys.oldPassword: oldPassword,
         ApiKeys.newPassword: newPassword,
         ApiKeys.confirmPassword: confirmPassword
@@ -33,7 +33,7 @@ class ProfileRepo {
       required String desc,
       required String min,
       required String brandName,
-      required String locationName,
+
       required XFile image}) async {
     try {
       FormData formData = FormData.fromMap({
@@ -42,7 +42,7 @@ class ProfileRepo {
         ApiKeys.desc: desc,
         ApiKeys.minOrder: min,
         ApiKeys.brandName: brandName,
-        ApiKeys.locationName: locationName,
+        ApiKeys.locationName:{"\"name\":\"cairo\",\"address\":\"cairo\",\"coordinates\":[1214451511,12541845]"},
         ApiKeys.image: await MultipartFile.fromFile(image.path, filename: image.path.split('/').last),
       });
       final response = await getIt<ApiConsumer>().post(EndPoint.updateChef, data: formData);
@@ -55,7 +55,7 @@ class ProfileRepo {
 
   Future<Either<String, String>> logout() async {
     try {
-      final response = await getIt<ApiConsumer>().post(EndPoint.logout);
+      final response = await getIt<ApiConsumer>().get(EndPoint.logout);
       return Right(response[ApiKeys.message]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -66,7 +66,8 @@ class ProfileRepo {
   Future<Either<String, Chef>> getProfile() async {
     try {
       final response = await getIt<ApiConsumer>().get(EndPoint.getChefDataEndPoint(getIt<CacheHelper>().getData(key: ApiKeys.id),),);
-      return Right(Chef.fromJson(response));
+      // print(response["chef"]);
+      return Right(Chef.fromJson(response["chef"]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

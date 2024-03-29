@@ -2,6 +2,9 @@
 import 'package:chef_app/features/home/logic/cubit/home_cubit.dart';
 import 'package:chef_app/features/menu/data/repository/menu_repo.dart';
 import 'package:chef_app/features/menu/logic/cubit/menu_cubit.dart';
+import 'package:chef_app/features/profile/data/repository/profile_repo.dart';
+import 'package:chef_app/features/profile/logic/cubit/change_password_cubit/change_password_cubit.dart';
+import 'package:chef_app/features/profile/logic/cubit/profile/profile_cubit.dart';
 import 'package:chef_app/features/signup/data/repository/signup_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -25,6 +28,8 @@ void setupGetIt(){
   getIt.registerLazySingleton(() => ForgetPasswordCubit(getIt()));
   getIt.registerLazySingleton(() => HomeCubit());
   getIt.registerLazySingleton(() => MenuCubit(getIt(), getIt()));
+  getIt.registerLazySingleton(() => ChangePasswordCubit(getIt()));
+  getIt.registerLazySingleton(() => ProfileCubit(getIt()));
 
 
 
@@ -32,6 +37,8 @@ void setupGetIt(){
   getIt.registerLazySingleton(() => AuthRepo());
   getIt.registerLazySingleton(() => SignUpRepo());
   getIt.registerLazySingleton(() => MenuRepo());
+  getIt.registerLazySingleton(() => ProfileRepo());
+
 
 
 

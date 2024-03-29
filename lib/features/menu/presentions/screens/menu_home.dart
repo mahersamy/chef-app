@@ -28,7 +28,12 @@ class _MenuHomeScreenState extends State<MenuHomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MenuCubit, MenuState>(
+    return BlocConsumer<MenuCubit, MenuState>(
+  listener: (context, state) {
+    if(state is GetMealsError){
+      navigatorReplacement(context: context, route: Routes.loginScreen);
+    }
+  },
   builder: (context, state) {
     return ConditionalBuilder(
       condition: state is GetMealsSuccess,
