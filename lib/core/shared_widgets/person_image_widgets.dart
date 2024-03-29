@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:chef_app/core/utlis/app_assets.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,7 +24,7 @@ class PersonImagePicker extends StatelessWidget {
               height: 161.h,
               width: 158.w,
               child: CircleAvatar(
-                backgroundImage:image==null?null:FileImage(File(image!.path)),
+                backgroundImage:image==null?const AssetImage(AppAssets.profile) as ImageProvider:FileImage(File(image!.path)),
                 backgroundColor: AppColors.grey,
               )),
           Positioned(

@@ -9,12 +9,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'features/menu/logic/cubit/menu_cubit.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
   await getIt<CacheHelper>().init();
-  runApp(BlocProvider(
-    create: (context) => GlobalCubit()..getLangInCache(),
+  runApp(MultiBlocProvider(
+    providers: [
+      BlocProvider<GlobalCubit>(
+        create: (context) => GlobalCubit()..getLangInCache(),
+      ),
+      BlocProvider<MenuCubit>(
+        create: (context) =>
+            getIt<MenuCubit>(), // Initialize your SecondBloc
+      ),
+
+    ],
     child: MyApp(),
   ));
 }
@@ -49,7 +60,7 @@ class MyApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 title: 'Chef app',
                 theme: getAppTheme(),
-                initialRoute: Routes.homeScreen,
+                initialRoute: Routes.initRoute,
                 onGenerateRoute: appRoute.generateRoute,
 
                 // home:LoginScreen(),

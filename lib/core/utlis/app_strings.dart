@@ -88,6 +88,7 @@ class AppStrings {
   static const String pleaseEnterValidMealDesc = 'pleaseEnterValidMealDesc';
   static const String pleaseEnterValidMealPrice = 'pleaseEnterValidMealPrice';
   static const String pleaseEnterValidMealPhoto = 'pleaseEnterValidMealPhoto';
+  static const String pleaseEnterValidMealCategory = 'pleaseEnterValidMealCategory';
 
   //!setting
   static const String editProfile = 'editProfile';

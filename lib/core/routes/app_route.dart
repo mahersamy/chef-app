@@ -11,6 +11,7 @@ import '../../features/auth/presentions/screens/send_code_screen.dart';
 import '../../features/auth/presentions/screens/splash_screen.dart';
 import '../../features/home/logic/cubit/home_cubit.dart';
 import '../../features/home/presentions/screens/home_screen.dart';
+import '../../features/menu/logic/cubit/menu_cubit.dart';
 import '../../features/menu/presentions/screens/add_menu_screen.dart';
 import '../../features/menu/presentions/screens/menu_home.dart';
 import '../../features/profile/presentions/screens/change_password_screens.dart';
@@ -59,7 +60,7 @@ class AppRoute {
       case Routes.homeScreen:
         return MaterialPageRoute(
             builder: (_) => BlocProvider(
-                  create: (BuildContext context) => getIt<HomeCubit>(),
+                  create:  (BuildContext context) => getIt<HomeCubit>(),
                   child: const HomeScreen(),
                 ));
       case Routes.resetPasswordScreen:
@@ -93,7 +94,8 @@ class AppRoute {
       case Routes.addMenuScreen:
         return MaterialPageRoute(builder: (_) => const AddMenuScreen());
       case Routes.menuHome:
-        return MaterialPageRoute(builder: (_) => const MenuScreen());
+        return MaterialPageRoute(
+            builder: (_) => const MenuHomeScreen());
       case Routes.changePasswordScreen:
         return MaterialPageRoute(builder: (_) => const ChangePasswordScreen());
       case Routes.profileScreen:

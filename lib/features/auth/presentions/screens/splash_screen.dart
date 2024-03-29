@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CustomImage(width: 120,height:120 ,imagePath: AppAssets.appLogo,),
+            CustomImage(width: 120,height:120 ,imagePath: AppAssets.appLogo,),
             SizedBox(height: 16.sp,),
             Text(AppStrings.chefApp.tr(context),style:Theme.of(context).textTheme.displayLarge!.copyWith(color: Colors.black),)
 

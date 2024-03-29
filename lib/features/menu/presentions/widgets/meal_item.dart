@@ -1,18 +1,27 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chef_app/core/shared_widgets/custom_progress.dart';
 import 'package:chef_app/core/utlis/app_colors.dart';
+import 'package:chef_app/features/menu/data/models/meal_models.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../logic/cubit/menu_cubit.dart';
+
 class MealItem extends StatelessWidget {
-  const MealItem({super.key});
+  const MealItem({super.key, required this.mealModel});
+  final MealModel mealModel;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Image.network(
-          "https://img.freepik.com/free-psd/delicious-fried-chicken-with-french-fries-isolated-transparent-background_191095-11719.jpg?t=st=1711058653~exp=1711062253~hmac=f104b99d6c6b9f53a6d74a44bf55e936bf5c2cd7536b48e382b592a1b3bd9f47&w=740",
+        CachedNetworkImage(
           height: 50.h,
-          width: 50.w,
+            width: 50.w,
+          imageUrl: mealModel.image,
+          progressIndicatorBuilder: (context, url, downloadProgress) => const CustomCircular(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         SizedBox(
           width: 16.h,
@@ -21,7 +30,7 @@ class MealItem extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              "Fried Chicken",
+              mealModel.name,
               style: Theme.of(context)
                   .textTheme
                   .displayMedium!
@@ -31,7 +40,7 @@ class MealItem extends StatelessWidget {
               height: 8.h,
             ),
             Text(
-              "Checken hint",
+              mealModel.description,
               style: Theme.of(context)
                   .textTheme
                   .displaySmall!
@@ -41,7 +50,7 @@ class MealItem extends StatelessWidget {
               height: 8.h,
             ),
             Text(
-              "200 LE",
+              mealModel.price,
               style: Theme.of(context)
                   .textTheme
                   .displaySmall!
@@ -49,9 +58,11 @@ class MealItem extends StatelessWidget {
             ),
           ],
         ),
-        Spacer(),
+        const Spacer(),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              BlocProvider.of<MenuCubit>(context).deleteMeal(mealModel.id);
+            },
             icon: const Icon(
               Icons.cancel,
               size: 50,
