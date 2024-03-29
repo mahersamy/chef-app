@@ -1,7 +1,6 @@
 import 'package:chef_app/core/commen/commen.dart';
 import 'package:chef_app/core/local/app_locale.dart';
 import 'package:chef_app/core/utlis/app_strings.dart';
-import 'package:chef_app/features/profile/logic/cubit/profile/profile_cubit.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +10,7 @@ import '../../../../core/routes/app_route.dart';
 import '../../../../core/shared_widgets/custom_progress.dart';
 import '../../../../core/utlis/app_colors.dart';
 import '../../logic/cubit/change_password_cubit/change_password_cubit.dart';
+import '../../logic/cubit/profile_cubit/profile_cubit.dart';
 import '../widgets/setting_item.dart';
 
 

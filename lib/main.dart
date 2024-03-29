@@ -4,7 +4,6 @@ import 'package:chef_app/core/helpers/cache_helper.dart';
 import 'package:chef_app/core/local/app_locale.dart';
 import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/core/theme/app_theme.dart';
-import 'package:chef_app/features/profile/logic/cubit/profile/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'features/menu/logic/cubit/menu_cubit.dart';
 import 'features/profile/logic/cubit/change_password_cubit/change_password_cubit.dart';
+import 'features/profile/logic/cubit/profile_cubit/profile_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

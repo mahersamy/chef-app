@@ -1,5 +1,4 @@
 import 'package:chef_app/core/local/app_locale.dart';
-import 'package:chef_app/features/profile/logic/cubit/profile/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,7 @@ import '../../../../core/shared_widgets/custom_button.dart';
 import '../../../../core/shared_widgets/custom_input.dart';
 import '../../../../core/shared_widgets/person_image_widgets.dart';
 import '../../../../core/utlis/app_strings.dart';
+import '../../logic/cubit/profile_cubit/profile_cubit.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({super.key});
