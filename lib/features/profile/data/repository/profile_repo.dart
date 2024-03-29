@@ -16,7 +16,7 @@ class ProfileRepo {
       required String confirmPassword}) async {
     try {
       final response =
-          await getIt<ApiConsumer>().post(EndPoint.chefChangePassword, data: {
+          await getIt<ApiConsumer>().patch(EndPoint.chefChangePassword, data: {
         ApiKeys.oldPassword: oldPassword,
         ApiKeys.newPassword: newPassword,
         ApiKeys.confirmPassword: confirmPassword
@@ -55,7 +55,7 @@ class ProfileRepo {
 
   Future<Either<String, String>> logout() async {
     try {
-      final response = await getIt<ApiConsumer>().post(EndPoint.logout);
+      final response = await getIt<ApiConsumer>().get(EndPoint.logout);
       return Right(response[ApiKeys.message]);
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
@@ -66,7 +66,8 @@ class ProfileRepo {
   Future<Either<String, Chef>> getProfile() async {
     try {
       final response = await getIt<ApiConsumer>().get(EndPoint.getChefDataEndPoint(getIt<CacheHelper>().getData(key: ApiKeys.id),),);
-      return Right(Chef.fromJson(response));
+      // print(response["chef"]);
+      return Right(Chef.fromJson(response["chef"]));
     } on ServerException catch (e) {
       return Left(e.errorModel.errorMessage);
     }

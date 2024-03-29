@@ -4,14 +4,16 @@ import 'package:chef_app/core/helpers/cache_helper.dart';
 import 'package:chef_app/core/local/app_locale.dart';
 import 'package:chef_app/core/routes/app_route.dart';
 import 'package:chef_app/core/theme/app_theme.dart';
+import 'package:chef_app/features/profile/logic/cubit/profile/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'features/menu/logic/cubit/menu_cubit.dart';
+import 'features/profile/logic/cubit/change_password_cubit/change_password_cubit.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   setupGetIt();
   await getIt<CacheHelper>().init();
@@ -21,10 +23,13 @@ void main() async{
         create: (context) => GlobalCubit()..getLangInCache(),
       ),
       BlocProvider<MenuCubit>(
-        create: (context) =>
-            getIt<MenuCubit>(), // Initialize your SecondBloc
+        create: (context) => getIt<MenuCubit>(), // Initialize your SecondBloc
       ),
-
+      BlocProvider<ChangePasswordCubit>(
+          create: (BuildContext context) => getIt<ChangePasswordCubit>()),
+      BlocProvider<ProfileCubit>(
+        create: (context) => getIt<ProfileCubit>(), // Initialize your SecondBloc
+      ),
     ],
     child: MyApp(),
   ));
@@ -42,32 +47,30 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (_, child) =>
-          BlocBuilder<GlobalCubit, GlobalState>(
-            builder: (context, state) {
-              return MaterialApp(
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  AppLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                  Locale("en"),
-                  Locale("ar"),
-                ],
-                locale: Locale(BlocProvider.of<GlobalCubit>(context).langCode),
-                debugShowCheckedModeBanner: false,
-                title: 'Chef app',
-                theme: getAppTheme(),
-                initialRoute: Routes.initRoute,
-                onGenerateRoute: appRoute.generateRoute,
+      builder: (_, child) => BlocBuilder<GlobalCubit, GlobalState>(
+        builder: (context, state) {
+          return MaterialApp(
+            localizationsDelegates: const [
+              GlobalMaterialLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              AppLocalizations.delegate,
+            ],
+            supportedLocales: const [
+              Locale("en"),
+              Locale("ar"),
+            ],
+            locale: Locale(BlocProvider.of<GlobalCubit>(context).langCode),
+            debugShowCheckedModeBanner: false,
+            title: 'Chef app',
+            theme: getAppTheme(),
+            initialRoute: Routes.initRoute,
+            onGenerateRoute: appRoute.generateRoute,
 
-                // home:LoginScreen(),
-              );
-            },
-          ),
+            // home:LoginScreen(),
+          );
+        },
+      ),
     );
   }
 }
-
