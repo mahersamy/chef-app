@@ -45,10 +45,10 @@ ThemeData getAppTheme() {
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          foregroundColor: MaterialStateProperty.all(
+          foregroundColor: WidgetStateProperty.all(
             AppColors.grey,
           ),
-          textStyle: MaterialStateProperty.all(
+          textStyle: WidgetStateProperty.all(
               boldStyle(color: AppColors.grey, fontSize: 16)),
         ),
       ));

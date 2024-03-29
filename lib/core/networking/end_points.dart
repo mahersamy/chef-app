@@ -39,6 +39,8 @@ class ApiKeys {
   static const String id = 'id';
   static const String email = 'email';
   static const String password = 'password';
+  static const String oldPassword = 'oldPass';
+  static const String newPassword = 'newPass';
   static const String confirmPassword = 'confirmPassword';
   static const String code = 'code';
   static const String message = 'message';
