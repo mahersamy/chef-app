@@ -10,7 +10,7 @@ import 'package:im_stepper/stepper.dart';
 import '../../logic/register_cubit/register_cubit.dart';
 
 class MainRegisterScreen extends StatelessWidget {
-  MainRegisterScreen({super.key});
+  const MainRegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

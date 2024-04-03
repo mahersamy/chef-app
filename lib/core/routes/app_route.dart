@@ -1,24 +1,17 @@
-import 'package:chef_app/core/di/dependency_injection.dart';
-import 'package:chef_app/features/auth/logic/cubit/forget_password_cubit/forget_password_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/auth/logic/cubit/login_cubit/login_cubit.dart';
 import '../../features/auth/presentions/screens/change_lang_screen.dart';
 import '../../features/auth/presentions/screens/login_screen.dart';
 import '../../features/auth/presentions/screens/reset_password_screen.dart';
 import '../../features/auth/presentions/screens/send_code_screen.dart';
 import '../../features/auth/presentions/screens/splash_screen.dart';
-import '../../features/home/logic/cubit/home_cubit.dart';
 import '../../features/home/presentions/screens/home_screen.dart';
 import '../../features/menu/presentions/screens/add_menu_screen.dart';
 import '../../features/menu/presentions/screens/menu_home.dart';
-import '../../features/profile/logic/cubit/change_password_cubit/change_password_cubit.dart';
 import '../../features/profile/presentions/screens/change_password_screens.dart';
 import '../../features/profile/presentions/screens/profile_screen.dart';
 import '../../features/profile/presentions/screens/setting_screen.dart';
 import '../../features/profile/presentions/screens/update_profile_screen.dart';
-import '../../features/signup/logic/register_cubit/register_cubit.dart';
 import '../../features/signup/presentions/screens/main_register_screen.dart';
 
 class Routes {
@@ -62,31 +55,19 @@ class AppRoute {
             builder: (_) => const HomeScreen());
       case Routes.resetPasswordScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (BuildContext context) => getIt<ForgetPasswordCubit>(),
-            child: const ResetPasswordScreen(),
-          ),
+          builder: (_) => const ResetPasswordScreen(),
         );
       case Routes.sendCodeScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (BuildContext context) => getIt<ForgetPasswordCubit>(),
-            child: const SendCodeScreen(),
-          ),
+          builder: (_) => const SendCodeScreen(),
         );
       case Routes.loginScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (BuildContext context) => getIt<LoginCubit>(),
-            child: const LoginScreen(),
-          ),
+          builder: (_) => const LoginScreen(),
         );
       case Routes.mainRegisterScreen:
         return MaterialPageRoute(
-          builder: (_) => BlocProvider(
-            create: (BuildContext context) => getIt<SignUpCubit>(),
-            child: MainRegisterScreen(),
-          ),
+          builder: (_) => const MainRegisterScreen(),
         );
       case Routes.addMenuScreen:
         return MaterialPageRoute(builder: (_) => const AddMenuScreen());
@@ -94,9 +75,7 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const MenuHomeScreen());
       case Routes.changePasswordScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                create: (BuildContext context) => getIt<ChangePasswordCubit>(),
-                child: const ChangePasswordScreen()));
+            builder: (_) => const ChangePasswordScreen());
       case Routes.profileScreen:
         return MaterialPageRoute(builder: (_) => const ProfileScreen());
       case Routes.settingScreen:

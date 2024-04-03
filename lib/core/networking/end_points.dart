@@ -16,7 +16,7 @@ class EndPoint {
 
 
   static String sendToken(String token){
-    return "FOODAPI ${token}";
+    return "FOODAPI $token";
   }
 
   static String getChefDataEndPoint(id) {
