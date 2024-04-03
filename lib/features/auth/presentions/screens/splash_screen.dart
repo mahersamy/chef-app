@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if(getIt<CacheHelper>().getData(key: ApiKeys.token)!=null){
         navigatorReplacement(context: context, route: Routes.homeScreen);
       }else{
-        navigatorReplacement(context: context, route: Routes.loginScreen);
+        navigatorReplacement(context: context, route: Routes.changeLangScreen);
       }
     });
   }
@@ -48,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CustomImage(width: 120,height:120 ,imagePath: AppAssets.appLogo,),
+            const CustomImage(width: 120,height:120 ,imagePath: AppAssets.appLogo,),
             SizedBox(height: 16.sp,),
             Text(AppStrings.chefApp.tr(context),style:Theme.of(context).textTheme.displayLarge!.copyWith(color: Colors.black),)
 
