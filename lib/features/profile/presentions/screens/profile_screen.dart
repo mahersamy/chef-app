@@ -10,7 +10,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/routes/app_route.dart';
 import '../../../../core/shared_widgets/custom_progress.dart';
 import '../../../../core/utlis/app_colors.dart';
-import '../../logic/cubit/change_password_cubit/change_password_cubit.dart';
 import '../widgets/setting_item.dart';
 
 

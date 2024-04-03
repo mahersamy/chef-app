@@ -10,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'features/home/logic/cubit/home_cubit.dart';
 import 'features/menu/logic/cubit/menu_cubit.dart';
-import 'features/profile/logic/cubit/change_password_cubit/change_password_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,8 +26,12 @@ void main() async {
         create: (context) => getIt<MenuCubit>(), // Initialize your SecondBloc
       ),
       BlocProvider<ProfileCubit>(
-        create: (context) => getIt<ProfileCubit>(), // Initialize your SecondBloc
+        create: (context) =>
+            getIt<ProfileCubit>(), // Initialize your SecondBloc
       ),
+      BlocProvider(
+        create: (BuildContext context) => getIt<HomeCubit>(),
+      )
     ],
     child: MyApp(),
   ));

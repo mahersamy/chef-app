@@ -59,10 +59,7 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => const ChangeLangScreen());
       case Routes.homeScreen:
         return MaterialPageRoute(
-            builder: (_) => BlocProvider(
-                  create: (BuildContext context) => getIt<HomeCubit>(),
-                  child: const HomeScreen(),
-                ));
+            builder: (_) => const HomeScreen());
       case Routes.resetPasswordScreen:
         return MaterialPageRoute(
           builder: (_) => BlocProvider(
