@@ -5,7 +5,7 @@
 - this app for chef admin you can add your recipe.
 - you can switch lang between arabic and english.
 - integration  with endpoint (API) using dio.
-
+- you can use this email for test email:mafia4943@gmail.com password:123456
 
 
 <hr>
