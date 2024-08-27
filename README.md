@@ -19,8 +19,8 @@
 
 
 ## 📂 Project Structure
+![Screenshot 2024-08-27 215823](https://github.com/user-attachments/assets/13f8744f-adb2-4f56-b3db-83d275b42c76)
 
-![image](https://github.com/AmmarAgeeza/Chef-App/assets/72443818/f91a7812-002b-42e1-a96d-a228aab5d767)
 
 ## 📱 UI 20+ SCREEN
 
